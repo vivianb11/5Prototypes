@@ -27,7 +27,7 @@ public class HoleBehaviour : MonoBehaviour
         else
         {
             print("hello");
-
+            collider.transform.DOMove(this.transform.position,1);
             collider.transform.DOScale(0,1);
             collider.GetComponent<SpriteRenderer>().DOFade(0,1).OnComplete(() => { Destroy(collider); });
         }
