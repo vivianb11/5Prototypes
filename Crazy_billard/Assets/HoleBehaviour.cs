@@ -9,8 +9,8 @@ public class HoleBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
-            //Event.current;
+        {   
+            collision.GetComponent<Respawn>().respawn();
         }
         else
         {

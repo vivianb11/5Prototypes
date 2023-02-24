@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //public delegate void ShakeCam();
-    //public static event ShakeCam OnPlayerColide;
-
     private Vector2 startPoint;
     private Vector2 endPoint;
+
+    public LineRenderer lR;
 
     public float force = 2;
 
@@ -18,24 +16,28 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        lR = GetComponentInChildren<LineRenderer>();
     }
 
-    private void OnMouseDown()
+    //private void OnMouseDown()
+    //{
+    //    startPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //}
+
+    private void OnMouseDrag()
     {
-        print(1);
-        startPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        lR.enabled = true;
+        lR.SetPosition(0,(Vector2)this.transform.position);
+        lR.startWidth = 0.05f;
+        lR.endWidth = 0.1f;
+        lR.SetPosition(1, (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition));
     }
 
     private void OnMouseUp()
     {
-        print(2);
+        lR.enabled = false;
         endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector2 direction = (startPoint - endPoint).normalized;
+        Vector2 direction = ((Vector2)this.transform.position - endPoint).normalized;
         rb.AddForce(direction * Vector2.Distance(startPoint,endPoint) * force, ForceMode2D.Impulse);
     }
-
-    //public void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    OnPlayerColide();
-    //}
 }
