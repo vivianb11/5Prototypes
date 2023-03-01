@@ -9,8 +9,9 @@ public class HoleBehaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {   
-            collision.GetComponent<Respawn>().respawn();
+        {
+            // collision.GetComponent<PlayerMovement>().enabled = false;
+            collision.GetComponent<Respawn>().RespawnBall();
         }
         else
         {
@@ -20,16 +21,22 @@ public class HoleBehaviour : MonoBehaviour
 
     void Action(string type, GameObject collider)
     {
-        if (type == "Black")
+        if (type == "Black" && GlobalBalls.ballNumber > 1)
         {
             GameOver();
         }
         else
         {
-            print("hello");
+            print("Hello");
             collider.transform.DOMove(this.transform.position,1);
             collider.transform.DOScale(0,1);
-            collider.GetComponent<SpriteRenderer>().DOFade(0,1).OnComplete(() => { Destroy(collider); });
+            collider.GetComponent<SpriteRenderer>().DOFade(0, 1).OnComplete(() =>
+            {
+                if (collider)
+                {
+                    Destroy(collider);
+                }
+            });
         }
     }
 
@@ -40,7 +47,8 @@ public class HoleBehaviour : MonoBehaviour
 
     IEnumerator StartGameOver()
     {
-        WaitForSeconds waitTime = new(5f);
+        WaitForSeconds waitTime = new(1f);
+        print("Game Over");
         yield return waitTime;
     }
 }

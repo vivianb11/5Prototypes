@@ -19,11 +19,6 @@ public class PlayerMovement : MonoBehaviour
         lR = GetComponentInChildren<LineRenderer>();
     }
 
-    //private void OnMouseDown()
-    //{
-    //    startPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //}
-
     private void OnMouseDrag()
     {
         lR.enabled = true;
