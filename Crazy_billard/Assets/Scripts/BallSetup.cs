@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BallSetup : MonoBehaviour
 {
+    private void Awake()
+    {
+        gameObject.SetActive(false);
+    }
     private void OnEnable()
     {
         GlobalBalls.ballNumber += 1;
