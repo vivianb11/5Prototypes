@@ -883,6 +883,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8068266828738297805, guid: 60e9b2818b86465428b2e4a66f9753de, type: 3}
   m_PrefabInstance: {fileID: 8068266828993901935}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &524077733 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 8068266828738297840, guid: 60e9b2818b86465428b2e4a66f9753de, type: 3}
+  m_PrefabInstance: {fileID: 8068266828993901935}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -3315,6 +3320,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1227521969}
     m_Modifications:
+    - target: {fileID: 1247606412091225905, guid: 60e9b2818b86465428b2e4a66f9753de, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 524077733}
+    - target: {fileID: 1247606412091225905, guid: 60e9b2818b86465428b2e4a66f9753de, type: 3}
+      propertyPath: chargePercent
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 8068266828738297805, guid: 60e9b2818b86465428b2e4a66f9753de, type: 3}
       propertyPath: m_RootOrder
       value: 0
