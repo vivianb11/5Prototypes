@@ -7,6 +7,7 @@ public class BlackBallBehaviour : MonoBehaviour
     public Black bBall;
     public Rigidbody2D rb;
 
+    [Header("Attaque Patern")]
     [Range(10,100)]
     public int chargePercent;
 
@@ -15,15 +16,19 @@ public class BlackBallBehaviour : MonoBehaviour
     private bool coroutinStarted = false;
     private bool ballColided = false;
 
+    private void Awake()
+    {
+        bBall = new(this.gameObject, chargePercent);
+        GlobalBalls.cBall.Add(bBall);
+    }
     private void Start()
     {
         rb = this.GetComponent<Rigidbody2D>();
-        bBall = new(this.gameObject, chargePercent);
     }
 
     private void Update()
     {
-        if (!coroutinStarted && !ballColided)
+        if (!coroutinStarted && !ballColided && rb.velocity.magnitude <= 0.1f && !bBall.ballRespawn)
         {
             StartCoroutine(StartBallBehavior());
         }
@@ -38,10 +43,24 @@ public class BlackBallBehaviour : MonoBehaviour
         WaitForSeconds wait = new(timeBetweenCharge);
         coroutinStarted = true;
 
-        bBall.BallMovement(timeBetweenCharge);
+        StartCoroutine(BallMovement());
 
         yield return wait;
         coroutinStarted = false;
+    }
+
+    public IEnumerator BallMovement()
+    {
+        WaitForSeconds wait1 = new(timeBetweenCharge * chargePercent/100);
+        WaitForSeconds wait2 = new(timeBetweenCharge - timeBetweenCharge * chargePercent/100);
+
+        Debug.Log("Wait 1 start");
+        bBall.BallMovement(1);
+        yield return wait1;
+
+        Debug.Log("Wait 2 start");
+        bBall.BallMovement(2);
+        yield return wait2;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,9 +84,12 @@ public class BlackBallBehaviour : MonoBehaviour
 
 public class Black : BallClass
 {
+    public bool ballRespawn;
+
     Rigidbody2D rb;
     GameObject go;
     Transform player;
+    Vector2 playerDirection;
 
     int chargePercent;
 
@@ -77,6 +99,7 @@ public class Black : BallClass
         rb = go.GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
         chargePercent = timeToChargeAttaque;
+        ballRespawn = false;
     }
 
     public override void BallAbility()
@@ -84,18 +107,21 @@ public class Black : BallClass
         throw new System.NotImplementedException();
     }
 
+    public override void BallMovement(int AbilityNumber)
+    {
+        if (AbilityNumber == 1)
+        {
+            playerDirection = (player.position - go.transform.position).normalized;
+            rb.AddForce(- playerDirection, ForceMode2D.Impulse);
+        }
+        if (AbilityNumber == 2)
+        {
+            rb.AddForce(playerDirection * 20, ForceMode2D.Impulse);
+        }
+    }
+
     public override void BallVFX(int number)
     {
         throw new System.NotImplementedException();
-    }
-
-    public override IEnumerator BallMovement(float time)
-    {
-        WaitForSeconds wait1 = new(time / chargePercent);
-        WaitForSeconds wait2 = new(time - time / chargePercent);
-        Debug.Log("Wait 1 start");
-        yield return wait1;
-        Debug.Log("Wait 2 start");
-        yield return wait2;
     }
 }

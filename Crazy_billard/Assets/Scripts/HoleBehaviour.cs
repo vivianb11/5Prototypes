@@ -11,6 +11,10 @@ public class HoleBehaviour : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             // collision.GetComponent<PlayerMovement>().enabled = false;
+            foreach (var item in GlobalBalls.cBall)
+            {
+                item.ballRespawn =true;
+            }
             collision.GetComponent<Respawn>().RespawnBall();
         }
         else
@@ -27,7 +31,6 @@ public class HoleBehaviour : MonoBehaviour
         }
         else
         {
-            print("Hello");
             collider.transform.DOMove(this.transform.position,1);
             collider.transform.DOScale(0,1);
             collider.GetComponent<SpriteRenderer>().DOFade(0, 1).OnComplete(() =>

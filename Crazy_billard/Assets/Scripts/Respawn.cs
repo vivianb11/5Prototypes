@@ -30,6 +30,10 @@ public class Respawn : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
+                foreach (var item in GlobalBalls.cBall)
+                {
+                    item.ballRespawn = false;
+                }
                 col.enabled = true;
                 rb.velocity = Vector2.zero;
                 instantiateSpawn = false;
