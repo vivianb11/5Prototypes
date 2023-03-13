@@ -5,17 +5,20 @@ using UnityEngine;
 public class Respawn : MonoBehaviour
 {
     private bool instantiateSpawn;
+    private bool collisionOtherBall = false;
 
     private Vector2 ballPosition;
 
     private Rigidbody2D rb;
     private Collider2D col;
+    private SpriteRenderer sr;
 
    public void RespawnBall()
     {
         instantiateSpawn = true;
         rb = this.GetComponent<Rigidbody2D>();
         col = this.GetComponent<Collider2D>();
+        sr = this.GetComponent<SpriteRenderer>();
         col.enabled = false;
     }
 
@@ -28,7 +31,16 @@ public class Respawn : MonoBehaviour
 
             this.transform.position = ballPosition;
 
-            if (Input.GetMouseButtonDown(0))
+            if (collisionOtherBall)
+            {
+                sr.color = Color.red;
+            }
+            else
+            {
+                sr.color = Color.white;
+            }
+
+            if (Input.GetMouseButtonDown(0) && !collisionOtherBall)
             {
                 foreach (var item in GlobalBalls.cBall)
                 {
@@ -39,5 +51,15 @@ public class Respawn : MonoBehaviour
                 instantiateSpawn = false;
             }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        collisionOtherBall = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        collisionOtherBall = false;
     }
 }
