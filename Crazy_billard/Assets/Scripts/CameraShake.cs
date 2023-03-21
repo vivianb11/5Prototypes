@@ -5,6 +5,8 @@ using DG.Tweening;
 
 public class CameraShake : MonoBehaviour
 {
+    public float shakeStrength = 0.4f;
+
     private Tween shake;
 
     private Vector3 initialPos;
@@ -18,6 +20,6 @@ public class CameraShake : MonoBehaviour
     {
         shake?.Kill();
         this.transform.position = initialPos;
-        shake = this.transform.DOShakePosition(0.5f);
+        shake = this.transform.DOShakePosition(0.4f, shakeStrength);
     }
 }

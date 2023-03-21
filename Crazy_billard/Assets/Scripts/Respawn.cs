@@ -12,6 +12,7 @@ public class Respawn : MonoBehaviour
     private Rigidbody2D rb;
     private Collider2D col;
     private SpriteRenderer sr;
+    public Collider2D trig;
 
    public void RespawnBall()
     {
@@ -20,6 +21,7 @@ public class Respawn : MonoBehaviour
         col = this.GetComponent<Collider2D>();
         sr = this.GetComponent<SpriteRenderer>();
         col.enabled = false;
+        trig.enabled = true;
     }
 
     private void Update()
@@ -44,9 +46,10 @@ public class Respawn : MonoBehaviour
             {
                 foreach (var item in GlobalBalls.cBall)
                 {
-                    item.ballRespawn = false;
+                    item.ChangeVariable(false);
                 }
                 col.enabled = true;
+                trig.enabled = false;
                 rb.velocity = Vector2.zero;
                 instantiateSpawn = false;
             }

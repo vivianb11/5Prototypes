@@ -149,3 +149,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 680a54f384397ff409ffef735f15e672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 8068266828738297840}
+  chargePercent: 25
+  timeBetweenCharge: 8

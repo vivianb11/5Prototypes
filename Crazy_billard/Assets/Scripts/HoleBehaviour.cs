@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using DG.Tweening;
 
@@ -13,45 +14,52 @@ public class HoleBehaviour : MonoBehaviour
             // collision.GetComponent<PlayerMovement>().enabled = false;
             foreach (var item in GlobalBalls.cBall)
             {
-                item.ballRespawn =true;
+                item.ChangeVariable(true);
             }
             collision.GetComponent<Respawn>().RespawnBall();
         }
         else
         {
-            Action(collision.tag, collision.gameObject);
+            Action(collision.name, collision.gameObject);
         }
     }
 
-    void Action(string type, GameObject collider)
+    async void Action(string name, GameObject collider)
     {
-        if (type == "Black" && GlobalBalls.ballNumber > 1)
+        if (name == "BlackBall" && GlobalBalls.ballNumber > 1)
         {
             GameOver();
         }
         else
         {
-            collider.transform.DOMove(this.transform.position,1);
             collider.transform.DOScale(0,1);
-            collider.GetComponent<SpriteRenderer>().DOFade(0, 1).OnComplete(() =>
+            collider.transform.DOMove(this.transform.position,1);
+            await collider.GetComponent<SpriteRenderer>().DOFade(0, 1).AsyncWaitForCompletion();
+            
+            if (collider)
             {
-                if (collider)
-                {
-                    Destroy(collider);
-                }
-            });
+                collider.SetActive(false);
+                collider.transform.position = new(0, 15);
+                collider.transform.DOScale(1,0);
+                collider.GetComponent<SpriteRenderer>().DOFade(1, 0);
+            }
         }
     }
 
     void GameOver()
     {
+        Debug.Log("GameOver Detected");
+
         StartCoroutine(nameof(StartGameOver));
     }
 
     IEnumerator StartGameOver()
     {
         WaitForSeconds waitTime = new(1f);
-        print("Game Over");
+
+        Debug.Log("GameOver");
         yield return waitTime;
+
+        SceneManager.LoadScene(0);
     }
 }

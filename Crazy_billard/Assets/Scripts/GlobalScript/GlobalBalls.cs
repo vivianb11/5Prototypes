@@ -8,5 +8,5 @@ public class GlobalBalls
 
     public static List<GameObject> balls = new();
 
-    public static List<Black> cBall = new();
+    public static List<BallClass> cBall = new();
 }

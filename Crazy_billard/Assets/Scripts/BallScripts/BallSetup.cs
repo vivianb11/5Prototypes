@@ -7,7 +7,6 @@ public class BallSetup : MonoBehaviour
     private void Awake()
     {
         GlobalBalls.balls.Add(gameObject);
-        gameObject.SetActive(false);
     }
 
     private void OnEnable()

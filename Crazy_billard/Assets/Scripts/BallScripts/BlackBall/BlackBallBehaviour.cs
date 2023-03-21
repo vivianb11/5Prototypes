@@ -18,7 +18,7 @@ public class BlackBallBehaviour : MonoBehaviour
 
     private void Awake()
     {
-        bBall = new(this.gameObject, chargePercent);
+        bBall = new(this.gameObject);
         GlobalBalls.cBall.Add(bBall);
     }
     private void Start()
@@ -54,11 +54,9 @@ public class BlackBallBehaviour : MonoBehaviour
         WaitForSeconds wait1 = new(timeBetweenCharge * chargePercent/100);
         WaitForSeconds wait2 = new(timeBetweenCharge - timeBetweenCharge * chargePercent/100);
 
-        Debug.Log("Wait 1 start");
         bBall.BallMovement(1);
         yield return wait1;
 
-        Debug.Log("Wait 2 start");
         bBall.BallMovement(2);
         yield return wait2;
     }
@@ -91,14 +89,11 @@ public class Black : BallClass
     Transform player;
     Vector2 playerDirection;
 
-    int chargePercent;
-
-    public Black(GameObject bGO, int timeToChargeAttaque)
+    public Black(GameObject bGO)
     {
         go = bGO;
         rb = go.GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player").transform;
-        chargePercent = timeToChargeAttaque;
         ballRespawn = false;
     }
 
@@ -123,5 +118,9 @@ public class Black : BallClass
     public override void BallVFX(int number)
     {
         throw new System.NotImplementedException();
+    }
+    public override void ChangeVariable(bool state)
+    {
+        ballRespawn = state;
     }
 }
