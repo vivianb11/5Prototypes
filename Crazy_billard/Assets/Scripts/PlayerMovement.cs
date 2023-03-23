@@ -37,19 +37,17 @@ public class PlayerMovement : MonoBehaviour
         endPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector2 direction = ((Vector2)this.transform.position - endPoint).normalized;
 
-        //SwitchColliders(false);
+        hit = Physics2D.CircleCast((Vector2)this.transform.position, 0.5f, direction);
 
+
+
+        if (hit.collider?.name == "PurpleBall")
+            {
+                hit.collider.GetComponent<PurpleBallBehaviour>().pBall.TpCondition(hit.normal);
+            }
+
+            rb.AddForce(direction * Vector2.Distance(this.transform.position, endPoint) * force, ForceMode2D.Impulse);
         
-        hit = Physics2D.CircleCast((Vector2)this.transform.position,0.5f, direction);
-
-        //SwitchColliders(true);
-
-        if (hit.collider.name == "PurpleBall" || !hit)
-        {
-            hit.collider.GetComponent<PurpleBallBehaviour>().pBall.TpCondition(hit.normal);
-        }
-
-        rb.AddForce(direction * Vector2.Distance(this.transform.position,endPoint) * force, ForceMode2D.Impulse);
     }
 
 
