@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
         mainCamera = Camera.main;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Get player input
         float moveHorizontal = Input.GetAxisRaw("Horizontal");
@@ -32,6 +32,6 @@ public class PlayerMovement : MonoBehaviour
         float angle = Mathf.Atan2(transform.position.y - targetPos.y, transform.position.x - targetPos.x) * Mathf.Rad2Deg;
 
         Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
     }
 }

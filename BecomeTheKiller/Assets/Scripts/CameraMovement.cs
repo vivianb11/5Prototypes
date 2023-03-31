@@ -15,15 +15,15 @@ public class CameraMovement: MonoBehaviour
         offset = transform.position - target.position;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         if (target == null)
-            return;
+        {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+            offset = transform.position - target.position;
+        }
 
         Vector3 targetPosition = target.position + offset;
         transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing * Time.deltaTime);
-
-        //transform.LookAt(target);
-        //transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 }
