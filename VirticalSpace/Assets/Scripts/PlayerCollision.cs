@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class PlayerCollision : MonoBehaviour, IDestructable
 {
@@ -25,6 +25,6 @@ public class PlayerCollision : MonoBehaviour, IDestructable
         yield return new WaitForSeconds(justSpawned.GetComponent<ParticleSystem>().main.duration);
         Destroy(justSpawned);
         yield return new WaitForSeconds(1f);
-        EditorSceneManager.LoadScene(0);
+        SceneManager.LoadScene(0);
     }
 }
