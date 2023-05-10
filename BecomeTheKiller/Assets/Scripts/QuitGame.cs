@@ -11,7 +11,7 @@ public class QuitGame : MonoBehaviour
         {
             Application.Quit();
         }
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(0);
         }

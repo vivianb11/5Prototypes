@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerSpawnIfNoEnnemies : MonoBehaviour
@@ -18,10 +19,9 @@ public class PlayerSpawnIfNoEnnemies : MonoBehaviour
         detectedObjects = new();
     }
 
-    // Update is called once per frame
     void Update()
     {
-         Physics2D.OverlapCircle((Vector2)transform.position, detectionRadius,new ContactFilter2D().NoFilter() , detectedObjects);
+        Physics2D.OverlapCircle((Vector2)transform.position, detectionRadius,new ContactFilter2D().NoFilter() , detectedObjects);
         foreach (Collider2D collider in detectedObjects)
         {
             if (collider.gameObject.CompareTag("Enemy"))
@@ -50,12 +50,13 @@ public class PlayerSpawnIfNoEnnemies : MonoBehaviour
         }
 
 
-        if (enemiesAround.Count <= 1)
+        if (enemiesAround.Count <= 1 && enemiesToSpawn.Count < 0)
         {
             Vector3 spawnPoint = Random.insideUnitSphere * detectionRadius;
             spawnPoint += transform.position;
 
             float distanceToPlayer = Vector3.Distance(spawnPoint, transform.position);
+
             if (distanceToPlayer > 3)
             {
                 Instantiate(enemiesToSpawn[(int)Random.Range(0, enemiesToSpawn.Count)], spawnPoint, Quaternion.identity);

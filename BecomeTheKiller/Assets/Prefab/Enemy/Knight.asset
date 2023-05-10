@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Knight
   m_EditorClassIdentifier: 
   typeOfAttaque: 0
-  attackDamage: 0
-  attackSpeed: 0
-  attackRange: 0
+  attackDamage: 1
+  attackSpeed: 2
+  attackRange: 1
   playerSpeed: 0.5
-  hp: 0
-  detectionZone: 5
+  hp: 8
+  detectionZone: 4.5

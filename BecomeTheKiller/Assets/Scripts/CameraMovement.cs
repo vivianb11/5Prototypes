@@ -24,6 +24,6 @@ public class CameraMovement: MonoBehaviour
         }
 
         Vector3 targetPosition = target.position + offset;
-        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, smoothing * Time.fixedDeltaTime);
     }
 }

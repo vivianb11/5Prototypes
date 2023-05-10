@@ -57,9 +57,16 @@ public class Behaviour : MonoBehaviour
         }
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, myData.detectionZone);
+    }
+
     void AttackPlayer()
     {
         Physics2D.OverlapCircle(this.transform.position, myData.detectionZone, new ContactFilter2D(), results);
+        
 
         resultsGo.Clear();
 
