@@ -11,6 +11,6 @@ public class ScoreManager : MonoBehaviour
     // Updates the nuber of balles left
     void Update()
     {
-        text.text= "Balles restentes : " + GlobalBalls.ballNumber;
+        text.text= "Balles restantes : " + GlobalBalls.ballNumber;
     }
 }

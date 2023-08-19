@@ -85,7 +85,7 @@ public class Behaviour : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         if (Vector2.Distance(player.transform.position,this.transform.position) > 0.5)
         {
-            this.transform.position = Vector3.LerpUnclamped(this.transform.position, player.transform.position, myData.playerSpeed * Time.fixedDeltaTime);
+            this.transform.position = Vector3.LerpUnclamped(this.transform.position, player.transform.position, myData.movementSpeed * Time.fixedDeltaTime);
         }
         else
         {

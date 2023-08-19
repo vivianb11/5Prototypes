@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6946972929555176933}
   - component: {fileID: 6946972929555176935}
-  - component: {fileID: 6946972929555176930}
+  - component: {fileID: 4686031898888579166}
   - component: {fileID: 6946972929555176929}
   - component: {fileID: 6946972929555176928}
+  - component: {fileID: 1364328627}
   m_Layer: 0
   m_Name: Player
   m_TagString: PlayerHolder
@@ -58,7 +59,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &6946972929555176930
+--- !u!114 &4686031898888579166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -67,12 +68,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6946972929555176943}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3f1bad14ffe4a4449d1a8b4a567b1fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 6836f6838bf1f4a4fa97af087dadaf6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemiesToSpawn: []
+  mainCamera: {fileID: 0}
+  offset: 3
+  minEnemiesInZone: 2
+  enemiesToSpawn:
+  - {fileID: 3579926718140145254, guid: ebb267e61c806cc40abc4c43b3c4579d, type: 3}
   enemiesAround: []
-  detectionRadius: 20
+  detectedColliders: []
 --- !u!114 &6946972929555176929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586031a81c290444d995ee008e3abcee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpawnIfNoEnnemies: {fileID: 6946972929555176930}
+  playerSpawnIfNoEnemies: {fileID: 4686031898888579166}
   myParticleSystem: {fileID: 2637906316628103191}
+  particlReceverRadiusDetection: 0.2
 --- !u!114 &6946972929555176928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,8 +105,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428eef7595cf3374aa987ba855490d4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalStats: {fileID: 1364328627}
   moveSpeed: 5
-  rotationSpeed: 200
+  rotationSpeed: 250
+--- !u!114 &1364328627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6946972929555176943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1435949d35a9046bd5ce3e9a236507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energy: 5
+  maxEnergy: 10
+  energyAmount: {fileID: 0}
+  energyAmountSlider: {fileID: 0}
+  hp: 1
+  maxHp: 10
+  hpAmount: {fileID: 0}
+  hpAmountSlider: {fileID: 0}
 --- !u!1 &6946972931016531186
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +249,10 @@ PrefabInstance:
     - target: {fileID: 4968353035342788026, guid: 611e5a1617bff294f957bee634a8cccd, type: 3}
       propertyPath: m_Name
       value: Emitter
+      objectReference: {fileID: 0}
+    - target: {fileID: 4968353035342788026, guid: 611e5a1617bff294f957bee634a8cccd, type: 3}
+      propertyPath: m_TagString
+      value: PlayerHolder
       objectReference: {fileID: 0}
     - target: {fileID: 4968353035342788031, guid: 611e5a1617bff294f957bee634a8cccd, type: 3}
       propertyPath: m_RootOrder

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3579926718140145052}
   - component: {fileID: 3579926718140145049}
   - component: {fileID: 3579926718140145050}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Knight
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -181,9 +181,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c191ee28505cf49a1c5024edff7f5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playableInstance: {fileID: 5821528856731043145, guid: 49e8b5452cc66ed41a4d552a97667361, type: 3}
-  particleRecever: {fileID: 3051003679941949422}
-  dataToGive: []
+  dataToGive:
+  - Title: playableInstance
+    goData: {fileID: 5821528856731043145, guid: 49e8b5452cc66ed41a4d552a97667361, type: 3}
+    scriptData: {fileID: 0}
+  - Title: particleRecever
+    goData: {fileID: 3051003679941949422}
+    scriptData: {fileID: 0}
 --- !u!1 &3579926719776583601
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ public class EnemyData : ScriptableObject
     public int attackRange;
 
     [Range(1, 5)]
-    public float playerSpeed;
+    public float movementSpeed;
 
     [Range(1, 100)]
     public int hp;

@@ -16,6 +16,6 @@ MonoBehaviour:
   attackDamage: 1
   attackSpeed: 2
   attackRange: 1
-  playerSpeed: 0.5
+  movementSpeed: 0.3
   hp: 8
   detectionZone: 4.5
